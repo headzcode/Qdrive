@@ -5,7 +5,6 @@ import { getDatabase, set, ref as dbRef, get, update } from "https://www.gstatic
 
 // Configuração do Firebase
 const firebaseConfig = {
-  
   apiKey: "AIzaSyDHkscCAj8pSyeN5KPXUn072_5XeSFF04M",
   authDomain: "fire-news-f1be1.firebaseapp.com",
   databaseURL: "https://fire-news-f1be1-default-rtdb.firebaseio.com",
@@ -25,13 +24,16 @@ const fileInput = document.getElementById('file-upload');
 const generateButton = document.getElementById('generate-code');
 const uniqueCodeElement = document.getElementById('unique-code');
 const generatedCode = document.getElementById('generated-code');
-
 const codeInput = document.getElementById('code-input');
 const downloadButton = document.getElementById('download-file');
-
 const totalFilesElement = document.getElementById('total-files');
 const totalDownloadsElement = document.getElementById('total-downloads');
-const statsChartCanvas = document.getElementById('stats-chart').getContext('2d');
+const statsChartCanvas = document.getElementById('stats-chart')?.getContext('2d');
+
+// Verifica se todos os elementos DOM existem
+if (!fileInput || !generateButton || !uniqueCodeElement || !generatedCode || !codeInput || !downloadButton || !totalFilesElement || !totalDownloadsElement || !statsChartCanvas) {
+  console.error('Um ou mais elementos DOM não foram encontrados.');
+}
 
 let totalFiles = 0;
 let totalDownloads = 0;
@@ -93,23 +95,28 @@ downloadButton.addEventListener('click', async () => {
   }
 
   try {
+    // Busca o código no Firebase Realtime Database
     const codeRef = dbRef(database, `codes/${code}`);
     const snapshot = await get(codeRef);
 
     if (snapshot.exists()) {
       const fileData = snapshot.val();
-      const fileURL = fileData.url;
+      const fileURL = `${fileData.url}?alt=media`; // Força o download com ?alt=media
 
+      // Verifica se a URL pertence ao Firebase Storage
       if (!fileURL.includes('firebasestorage.googleapis.com')) {
         alert('Link inválido ou não autorizado.');
         return;
       }
 
+      // Atualiza o contador de downloads
       await update(codeRef, { downloads: (fileData.downloads || 0) + 1 });
 
+      // Atualiza as estatísticas globais
       totalDownloads++;
       updateStats();
 
+      // Cria um link de download dinâmico
       const downloadLink = document.createElement('a');
       downloadLink.href = fileURL;
       downloadLink.download = fileURL.split('/').pop(); // Extrai o nome do arquivo da URL
@@ -123,6 +130,7 @@ downloadButton.addEventListener('click', async () => {
     alert('Ocorreu um erro ao buscar o arquivo. Tente novamente.');
   }
 });
+
 // Atualiza as estatísticas na tela
 function updateStats() {
   totalFilesElement.textContent = totalFiles;
@@ -136,32 +144,35 @@ function updateStats() {
 }
 
 // Inicializa o gráfico
-const statsChart = new Chart(statsChartCanvas, {
-  type: 'bar',
-  data: {
-    labels: ['Arquivos Enviados', 'Downloads Realizados'],
-    datasets: [{
-      label: 'Estatísticas',
-      data: [totalFiles, totalDownloads],
-      backgroundColor: ['#6e8efb', '#a777e3'],
-      borderColor: ['#6e8efb', '#a777e3'],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false
-      }
+let statsChart;
+if (statsChartCanvas) {
+  statsChart = new Chart(statsChartCanvas, {
+    type: 'bar',
+    data: {
+      labels: ['Arquivos Enviados', 'Downloads Realizados'],
+      datasets: [{
+        label: 'Estatísticas',
+        data: [totalFiles, totalDownloads],
+        backgroundColor: ['#6e8efb', '#a777e3'],
+        borderColor: ['#6e8efb', '#a777e3'],
+        borderWidth: 1
+      }]
     },
-    scales: {
-      y: {
-        beginAtZero: true
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
     }
-  }
-});
+  });
+}
 
 // Carrega as estatísticas iniciais
 (async () => {
