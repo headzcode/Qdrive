@@ -93,7 +93,6 @@ downloadButton.addEventListener('click', async () => {
   }
 
   try {
-    // Busca o código no Firebase Realtime Database
     const codeRef = dbRef(database, `codes/${code}`);
     const snapshot = await get(codeRef);
 
@@ -101,27 +100,21 @@ downloadButton.addEventListener('click', async () => {
       const fileData = snapshot.val();
       const fileURL = fileData.url;
 
-      // Verifica se a URL pertence ao Firebase Storage
       if (!fileURL.includes('firebasestorage.googleapis.com')) {
         alert('Link inválido ou não autorizado.');
         return;
       }
 
-      // Atualiza o contador de downloads
       await update(codeRef, { downloads: (fileData.downloads || 0) + 1 });
 
-      // Atualiza as estatísticas globais
       totalDownloads++;
       updateStats();
 
-      // Cria um link de download dinâmico
       const downloadLink = document.createElement('a');
       downloadLink.href = fileURL;
       downloadLink.download = fileURL.split('/').pop(); // Extrai o nome do arquivo da URL
+      downloadLink.setAttribute('download', ''); // Força o download
       downloadLink.click();
-
-      // Limpa o link após o download
-      downloadLink.remove();
     } else {
       alert('Código inválido ou expirado.');
     }
@@ -130,7 +123,6 @@ downloadButton.addEventListener('click', async () => {
     alert('Ocorreu um erro ao buscar o arquivo. Tente novamente.');
   }
 });
-
 // Atualiza as estatísticas na tela
 function updateStats() {
   totalFilesElement.textContent = totalFiles;
