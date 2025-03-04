@@ -5,6 +5,7 @@ import { getDatabase, set, ref as dbRef, get, update } from "https://www.gstatic
 
 // Configuração do Firebase
 const firebaseConfig = {
+  
   apiKey: "AIzaSyDHkscCAj8pSyeN5KPXUn072_5XeSFF04M",
   authDomain: "fire-news-f1be1.firebaseapp.com",
   databaseURL: "https://fire-news-f1be1-default-rtdb.firebaseio.com",
@@ -100,6 +101,12 @@ downloadButton.addEventListener('click', async () => {
       const fileData = snapshot.val();
       const fileURL = fileData.url;
 
+      // Verifica se a URL pertence ao Firebase Storage
+      if (!fileURL.includes('firebasestorage.googleapis.com')) {
+        alert('Link inválido ou não autorizado.');
+        return;
+      }
+
       // Atualiza o contador de downloads
       await update(codeRef, { downloads: (fileData.downloads || 0) + 1 });
 
@@ -107,9 +114,8 @@ downloadButton.addEventListener('click', async () => {
       totalDownloads++;
       updateStats();
 
-      // Usa o iframe oculto para iniciar o download
-      const hiddenIframe = document.getElementById('hidden-iframe');
-      hiddenIframe.src = fileURL;
+      // Redireciona para o link de download
+      window.location.href = fileURL;
     } else {
       alert('Código inválido ou expirado.');
     }
