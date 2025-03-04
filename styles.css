@@ -1,0 +1,101 @@
+body {
+       font-family: 'Arial', sans-serif;
+       margin: 0;
+       padding: 0;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 100vh;
+       background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+       color: #fff;
+     }
+
+     .glass-container {
+       background: rgba(255, 255, 255, 0.1);
+       backdrop-filter: blur(10px);
+       border-radius: 20px;
+       padding: 30px;
+       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+       border: 1px solid rgba(255, 255, 255, 0.1);
+       max-width: 500px;
+       width: 100%;
+       text-align: center;
+     }
+
+     .title {
+       font-size: 2.5rem;
+       margin-bottom: 20px;
+       color: #00ffcc;
+     }
+
+     .tabs {
+       display: flex;
+       justify-content: center;
+       margin-bottom: 20px;
+     }
+
+     .tab-button {
+       background: rgba(255, 255, 255, 0.1);
+       border: none;
+       padding: 10px 20px;
+       margin: 0 10px;
+       border-radius: 10px;
+       color: #fff;
+       cursor: pointer;
+       transition: background 0.3s ease;
+     }
+
+     .tab-button.active {
+       background: #00ffcc;
+       color: #1a1a1a;
+     }
+
+     .section {
+       display: none;
+     }
+
+     .section.active {
+       display: block;
+     }
+
+     .file-input {
+       margin-bottom: 20px;
+     }
+
+     .upload-button {
+       background: #00ffcc;
+       border: none;
+       padding: 10px 20px;
+       border-radius: 10px;
+       color: #1a1a1a;
+       cursor: pointer;
+       transition: background 0.3s ease;
+     }
+
+     .upload-button:hover {
+       background: #00ccaa;
+     }
+
+     .qr-code-container {
+       margin-top: 20px;
+     }
+
+     .scan-box {
+       position: relative;
+       width: 100%;
+       height: 300px;
+       background: rgba(0, 0, 0, 0.5);
+       border-radius: 20px;
+       overflow: hidden;
+     }
+
+     .scanner-video {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+     }
+
+     .scan-result {
+       margin-top: 20px;
+       font-size: 1.2rem;
+     }
