@@ -107,18 +107,9 @@ downloadButton.addEventListener('click', async () => {
       totalDownloads++;
       updateStats();
 
-      // Baixa o arquivo como Blob
-      const response = await fetch(fileURL);
-      const blob = await response.blob();
-
-      // Cria um link de download temporário
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = fileURL.split('/').pop(); // Extrai o nome do arquivo da URL
-      downloadLink.click();
-
-      // Libera o objeto Blob da memória
-      URL.revokeObjectURL(downloadLink.href);
+      // Usa o iframe oculto para iniciar o download
+      const hiddenIframe = document.getElementById('hidden-iframe');
+      hiddenIframe.src = fileURL;
     } else {
       alert('Código inválido ou expirado.');
     }
