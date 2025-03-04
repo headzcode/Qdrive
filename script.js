@@ -114,8 +114,14 @@ downloadButton.addEventListener('click', async () => {
       totalDownloads++;
       updateStats();
 
-      // Redireciona para o link de download
-      window.location.href = fileURL;
+      // Cria um link de download dinâmico
+      const downloadLink = document.createElement('a');
+      downloadLink.href = fileURL;
+      downloadLink.download = fileURL.split('/').pop(); // Extrai o nome do arquivo da URL
+      downloadLink.click();
+
+      // Limpa o link após o download
+      downloadLink.remove();
     } else {
       alert('Código inválido ou expirado.');
     }
