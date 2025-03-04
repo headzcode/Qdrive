@@ -6,5 +6,7 @@ const firebaseConfig = {
   storageBucket: "fire-news-f1be1.appspot.com",
   messagingSenderId: "368411474818",
   appId: "1:368411474818:web:567947238fa8f2da5fad9b"
-     };
-     firebase.initializeApp(firebaseConfig);
+};
+
+// Inicialize o Firebase
+firebase.initializeApp(firebaseConfig);
