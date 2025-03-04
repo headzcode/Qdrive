@@ -1,0 +1,102 @@
+/* Estilo Geral */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Seção de Upload */
+.upload-section {
+  margin-bottom: 20px;
+}
+
+input[type="file"], input[type="text"] {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+#generated-code {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+/* Seção de Leitor de Código */
+.reader-section {
+  margin-bottom: 20px;
+}
+
+/* Seção de Estatísticas */
+.stats-section {
+  margin-top: 20px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.stat-card span {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat-card p {
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+/* Gráfico */
+#stats-chart {
+  margin-top: 20px;
+}
