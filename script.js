@@ -5,13 +5,13 @@ import { getDatabase, set, ref as dbRef, get, update } from "https://www.gstatic
 
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDHkscCAj8pSyeN5KPXUn072_5XeSFF04M",
-  authDomain: "fire-news-f1be1.firebaseapp.com",
-  databaseURL: "https://fire-news-f1be1-default-rtdb.firebaseio.com",
-  projectId: "fire-news-f1be1",
-  storageBucket: "fire-news-f1be1.appspot.com",
-  messagingSenderId: "368411474818",
-  appId: "1:368411474818:web:567947238fa8f2da5fad9b"
+    apiKey: "AIzaSyCzYNZNSqCZkvtzqC8-JIIKExtGVKJC6tc",
+  authDomain: "marketsrc-cb564.firebaseapp.com",
+  databaseURL: "https://marketsrc-cb564-default-rtdb.firebaseio.com",
+  projectId: "marketsrc-cb564",
+  storageBucket: "marketsrc-cb564.appspot.com",
+  messagingSenderId: "929727087008",
+  appId: "1:929727087008:web:d6bd0c309c54da5b1f64c5"
 };
 
 // Inicializa o Firebase
